@@ -35,49 +35,49 @@ public class NBody{
 		double radius=readRadius(filename);
 
 		//draw backgound
-        StdDraw.setScale(-radius, radius);
-        StdDraw.clear();
-        StdDraw.picture(0, 0, "images/starfield.jpg");
+		StdDraw.setScale(-radius, radius);
+		StdDraw.clear();
+		StdDraw.picture(0, 0, "images/starfield.jpg");
 
         //draw planets
-        for (Planet planet : allPlanets) {
-            planet.draw();
-        }
+		for (Planet planet : allPlanets) {
+			planet.draw();
+		}
 
-        StdDraw.enableDoubleBuffering();
-                
-        for (double t = 0; t <= T; t += dt) {
-            double[] xForces = new double[allPlanets.length];
-            double[] yForces = new double[allPlanets.length];
+		StdDraw.enableDoubleBuffering();
+		
+		for (double t = 0; t <= T; t += dt) {
+			double[] xForces = new double[allPlanets.length];
+			double[] yForces = new double[allPlanets.length];
             // Calculate the net forces for every planet            
-            for (int i = 0; i < allPlanets.length; i++) {
-                xForces[i] = allPlanets[i].calcNetForceExertedByX(allPlanets);
-                yForces[i] = allPlanets[i].calcNetForceExertedByY(allPlanets);
-            }
+			for (int i = 0; i < allPlanets.length; i++) {
+				xForces[i] = allPlanets[i].calcNetForceExertedByX(allPlanets);
+				yForces[i] = allPlanets[i].calcNetForceExertedByY(allPlanets);
+			}
 
             // Update positions and velocities of each planet         
-            for (int i = 0; i < allPlanets.length; i++) {
-            	allPlanets[i].update(dt, xForces[i], yForces[i]);
-            }
+			for (int i = 0; i < allPlanets.length; i++) {
+				allPlanets[i].update(dt, xForces[i], yForces[i]);
+			}
 
             // Draw the background        
-            StdDraw.picture(0, 0, "images/starfield.jpg");
+			StdDraw.picture(0, 0, "images/starfield.jpg");
 
             // Draw all planets
-            for (Planet planet : allPlanets) {
-                planet.draw();
-            }
+			for (Planet planet : allPlanets) {
+				planet.draw();
+			}
 
-            StdDraw.show();
-            StdDraw.pause(10);
-        }
+			StdDraw.show();
+			StdDraw.pause(10);
+		}
 
-        StdOut.printf("%d\n", planets.length);
+		StdOut.printf("%d\n", allPlanets.length);
 		StdOut.printf("%.2e\n", radius);
-		for (int i = 0; i < planets.length; i++) {
-    		StdOut.printf("%11.4e %11.4e %11.4e %11.4e %11.4e %12s\n",
-                  planets[i].xxPos, planets[i].yyPos, planets[i].xxVel,
-                  planets[i].yyVel, planets[i].mass, planets[i].imgFileName);   
+		for (int i = 0; i < allPlanets.length; i++) {
+			StdOut.printf("%11.4e %11.4e %11.4e %11.4e %11.4e %12s\n",
+				allPlanets[i].xxPos, allPlanets[i].yyPos, allPlanets[i].xxVel,
+				allPlanets[i].yyVel, allPlanets[i].mass, allPlanets[i].imgFileName); 
 		}
 	}
 }
